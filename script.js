@@ -41,6 +41,12 @@ class Character {
     return result;
     // console.log(`${this.name} rolled a ${result}.`);
   }
+
+  converse(person) {
+    console.log(
+      `Hello there ${person.name}, I am ${this.name} and I am looking to find ${person.inventory[0]}.`
+    );
+  }
 }
 
 const robin = new Character("Robin");
@@ -88,6 +94,10 @@ class Adventurer extends Character {
   damageTaken() {
     console.log("Damage from enemy");
     super.health -= 5;
+  }
+
+  converse(person) {
+    super.converse(person);
   }
 
   duel(adventurer) {
@@ -170,3 +180,40 @@ const frank = new Companion("Frank", "Flea", ["small hat", "sunglasses"]);
 
 //   const healers = new AdventurerFactory("Healer");
 //   const robin = healers.generate("Robin");
+
+// Part Seven
+
+const novice = new Adventurer("Unamed", "Beginner", "Punch", false, 1, 0);
+
+class NPC extends Character {
+  constructor(name, job, inventory, location, level) {
+    super(name);
+    this.inventory = inventory;
+    this.job = job;
+    this.location = location;
+    this.level = level;
+  }
+
+  converse(person) {
+    super.converse(person);
+  }
+}
+
+const generalStoreNPC = new NPC(
+  "Marie",
+  "General Store Keeper",
+  ["potion", "shield", "bow", "wand", "sword"],
+  "General Store",
+  "???"
+);
+
+const guildManagerNPC = new NPC(
+  "Scar",
+  "Guild Manager",
+  ["job list", "register form", "mystery item"],
+  "Guild Hall",
+  "???"
+);
+
+console.log(generalStoreNPC.converse(robin2));
+console.log(Jarry.converse(guildManagerNPC));
